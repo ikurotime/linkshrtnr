@@ -3,8 +3,6 @@ import { createClient } from '@/utils/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
   try {
-    // This `try/catch` block is only here for the interactive tutorial.
-    // Feel free to remove once you have Supabase connected.
     const { supabase, response } = createClient(request)
 
     // Refresh session if expired - required for Server Components
@@ -18,8 +16,8 @@ export async function middleware(request: NextRequest) {
     // Check out http://localhost:3000 for Next Steps.
     return NextResponse.next({
       request: {
-        headers: request.headers,
-      },
+        headers: request.headers
+      }
     })
   }
 }
@@ -33,6 +31,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * Feel free to modify this pattern to include more paths.
      */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-  ],
+    '/((?!_next/static|_next/image|favicon.ico).*)'
+  ]
 }
