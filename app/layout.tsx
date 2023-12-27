@@ -1,6 +1,8 @@
-import { GeistSans } from 'geist/font/sans'
-import { Gabarito } from 'next/font/google'
 import './globals.css'
+
+import { Gabarito } from 'next/font/google'
+import { ThemeProvider } from '@/components/theme-provider'
+import { cn } from '@/lib/utils'
 
 const gabarito = Gabarito({
   weight: ['400', '500', '600', '700'],
@@ -12,8 +14,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'Next.js and Supabase Starter Kit',
-  description: 'The fastest way to build apps with Next.js and Supabase'
+  title: 'LinkShrtnr',
+  description: 'A simple URL shortener.'
 }
 
 export default function RootLayout({
@@ -23,10 +25,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={gabarito.className}>
-      <body className='bg-background text-foreground'>
-        <main className='min-h-screen flex flex-col items-center'>
-          {children}
-        </main>
+      <body className={cn('bg-background text-foreground dark:dark')}>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main className='flex flex-col items-center min-h-screen'>
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   )

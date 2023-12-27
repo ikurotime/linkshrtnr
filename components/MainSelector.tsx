@@ -1,31 +1,60 @@
+'use client'
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from './ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@radix-ui/react-tabs'
+
+import { Button } from './ui/button'
+import { Input } from './ui/input'
+import { Label } from '@radix-ui/react-label'
+
 export default function MainSelector() {
   return (
-    <div className='flex flex-col text-2xl gap-6 border-rounded-md relative'>
-      <form
-        action=''
-        className='border-2 border-foreground/10 rounded-md flex flex-col p-8 gap-5 bg-white dark:black'
-      >
-        <label htmlFor='link'>Enter a loooong link</label>
-        <input
-          name='link'
-          type='text'
-          placeholder='Example: https://yourwebsite.com/your/long/link'
-          className='border border-foreground/10 rounded-md p-3 text-xl'
-        />
-        <span>Your new link will be:</span>
-        <div>
-          <span>linkshrtnrn.com/</span>
-          <input
-            name='path'
-            type='text'
-            placeholder='Example: new-link'
-            className='border border-foreground/10 rounded-md p-3 text-xl'
-          />
-        </div>
-        <button className='rounded-md px-2 py-2 bg-[rgb(234,198,67)] text-white'>
-          Generate my link
-        </button>
-      </form>
-    </div>
+    <Tabs defaultValue='Shorten Url' className='w-[500px]  p-8 rounded'>
+      <TabsList className='grid w-full grid-cols-3'>
+        <TabsTrigger value='Shorten Url'>Shorten Url</TabsTrigger>
+        <TabsTrigger value='Generate QR Code'>Generate QR Code</TabsTrigger>
+        <TabsTrigger value='Link in Bio'>Link in Bio</TabsTrigger>
+      </TabsList>
+      <TabsContent value='Shorten Url'>
+        <Card>
+          <CardHeader>
+            <CardTitle>Shorten URL</CardTitle>
+            <CardDescription>
+              Create a short link to share with your audience.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className='space-y-2'>
+            <div className='space-y-1'>
+              <Label htmlFor='long_url'>Looong URL</Label>
+              <Input
+                id='long_url'
+                placeholder='https://your-long-url.com/some-annoying-path'
+              />
+            </div>
+            <div className='space-y-1'>
+              <Label htmlFor='username'>Path</Label>
+              <div className='flex items-center'>
+                <Input defaultValue='linkshrtnr.com/' disabled />
+                <Input id='username' placeholder='my-url' />
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button>Save changes</Button>
+          </CardFooter>
+        </Card>
+      </TabsContent>
+      <TabsContent value='Generate QR Code'>
+        Make changes to your account here.
+      </TabsContent>
+      <TabsContent value='Link in Bio'>Change your password here.</TabsContent>
+    </Tabs>
   )
 }
